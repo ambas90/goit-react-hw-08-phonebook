@@ -1,6 +1,9 @@
 import ContactForm from '../contactForm/ContactForm';
 import Filter from '../filter/Filter';
 import ContactList from '../contactList/ContactList';
+import RegisterForm from '../registerForm/RegisterForm';
+import LoginForm from 'components/loginForm/LoginForm';
+import UserMenu from 'components/userMenu/UserMenu';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setFilter } from '../../redux/reducers';
@@ -13,9 +16,12 @@ import {
   selectFilter,
   selectFilteredContacts,
 } from '../../redux/selectors';
+import useAuth from 'hooks/useAuth';
+import { refreshUser } from '../../redux/auth/operations';
 
 export default function App() {
   const dispatch = useDispatch();
+  const { isRefreshing, isLoggedIn } = useAuth();
 
   const contacts = useSelector(selectContacts);
   const filter = useSelector(selectFilter);
@@ -43,12 +49,23 @@ export default function App() {
   };
 
   useEffect(() => {
-    dispatch(getContacts());
+    dispatch(refreshUser());
   }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getContacts());
+  }, []);
+
+  if (isRefreshing) {
+    return <p>loading...</p>;
+  }
 
   return (
     <AppContainer>
       <AppWrapper>
+        {isLoggedIn && <UserMenu />}
+        <RegisterForm />
+        <LoginForm />
         <h1>Phonebook</h1>
         <ContactForm onSubmit={handleAddContact} />
         <h2>Contacts</h2>

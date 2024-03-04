@@ -1,7 +1,7 @@
-import { configureStore } from '@reduxjs/toolkit';
-import { phonebookSlice } from './reducers';
-import storage from 'redux-persist/lib/storage';
-import { authReducer } from './auth/authSlice';
+import { configureStore } from "@reduxjs/toolkit";
+import { tasksReducer } from "./tasks/tasksSlice";
+import { authReducer } from "./auth/authSlice";
+import storage from "redux-persist/lib/storage";
 import {
   persistReducer,
   persistStore,
@@ -11,20 +11,20 @@ import {
   PERSIST,
   PURGE,
   REGISTER,
-} from 'redux-persist';
+} from "redux-persist";
 
 const authPersistConfig = {
-  key: 'auth',
+  key: "auth",
   storage,
-  whitelist: ['token'],
+  whitelist: ["token"],
 };
 
 export const store = configureStore({
   reducer: {
-    phonebook: phonebookSlice.reducer,
+    tasks: tasksReducer,
     auth: persistReducer(authPersistConfig, authReducer),
   },
-  middleware: getDefaultMiddleware =>
+  middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
