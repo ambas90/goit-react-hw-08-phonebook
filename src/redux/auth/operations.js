@@ -14,10 +14,10 @@ export const register = createAsyncThunk(
   async (credentials, thunkAPI) => {
     try {
       const res = await axios.post('/users/signup', credentials);
-      console.log(res);
       setAuthHeader(res.data.token);
       return res.data;
     } catch (err) {
+      window.alert(' password too weak');
       return thunkAPI.rejectWithValue(err.message);
     }
   }
@@ -28,10 +28,10 @@ export const login = createAsyncThunk(
   async (credentials, thunkAPI) => {
     try {
       const res = await axios.post('/users/login', credentials);
-      console.log(res);
       setAuthHeader(res.data.token);
       return res.data;
     } catch (err) {
+      window.alert('incorrect email or password');
       return thunkAPI.rejectWithValue(err.message);
     }
   }
