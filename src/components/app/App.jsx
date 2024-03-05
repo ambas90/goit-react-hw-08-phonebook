@@ -45,9 +45,7 @@ export default function App() {
           />
           <Route
             path="contacts"
-            element={
-              <ProtectedRoute Component={<Phonebook />} redirecTo="/login" />
-            }
+            element={<ProtectedRoute Component={<Phonebook />} redirecTo="/" />}
           />
         </Route>
       </Routes>
