@@ -1,3 +1,9 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import useAuth from 'hooks/useAuth';
+import { refreshUser } from '../../redux/auth/operations';
+
 import RegisterForm from '../registerForm/RegisterForm';
 import LoginForm from 'components/loginForm/LoginForm';
 import Layout from 'components/layout/Layout';
@@ -5,11 +11,7 @@ import Home from 'components/home/Home';
 import Phonebook from 'components/phonebook/Phonebook';
 import PrivateRoute from 'components/privateRoute/PrivateRoute';
 import ProtectedRoute from 'components/protectedRoute/ProtectedRoute';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import useAuth from 'hooks/useAuth';
-import { refreshUser } from '../../redux/auth/operations';
+import NotFound from 'components/notFound/NotFound';
 
 export default function App() {
   const dispatch = useDispatch();
@@ -48,6 +50,7 @@ export default function App() {
             element={<ProtectedRoute Component={<Phonebook />} redirecTo="/" />}
           />
         </Route>
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );

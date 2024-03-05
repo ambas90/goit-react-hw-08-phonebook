@@ -8,6 +8,7 @@ import {
   RegisterButton,
   RegisterWrapper,
 } from './RegisterFormStyles';
+import { Helmet } from 'react-helmet';
 
 const RegisterForm = () => {
   const dispatch = useDispatch();
@@ -26,6 +27,9 @@ const RegisterForm = () => {
 
   return (
     <RegisterContainer>
+      <Helmet>
+        <title>Register</title>
+      </Helmet>
       <RegisterWrapper>
         <RegisterFormUi onSubmit={handleSubmit} autoComplete="off">
           <RegisterFormLabel>

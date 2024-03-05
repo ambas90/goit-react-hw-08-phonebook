@@ -8,6 +8,7 @@ import {
   LoginFormInput,
   LoginButton,
 } from './LoginFormStyles';
+import { Helmet } from 'react-helmet';
 const LoginForm = () => {
   const dispatch = useDispatch();
 
@@ -24,6 +25,9 @@ const LoginForm = () => {
 
   return (
     <LoginContainer>
+      <Helmet>
+        <title>Login</title>
+      </Helmet>
       <LoginWrapper>
         <LoginFormUi onSubmit={handleSubmit} autoComplete="off">
           <LoginFormLabel>

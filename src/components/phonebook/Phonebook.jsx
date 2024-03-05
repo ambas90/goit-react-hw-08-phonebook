@@ -13,6 +13,7 @@ import {
   selectFilter,
   selectFilteredContacts,
 } from '../../redux/selectors';
+import { Helmet } from 'react-helmet';
 import useAuth from 'hooks/useAuth';
 
 export default function Phonebook() {
@@ -50,6 +51,9 @@ export default function Phonebook() {
 
   return (
     <AppContainer>
+      <Helmet>
+        <title>Contacts</title>
+      </Helmet>
       <AppWrapper>
         <h1>Phonebook</h1>
         <ContactForm onSubmit={handleAddContact} />
