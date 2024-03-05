@@ -46,7 +46,7 @@ export default function Phonebook() {
 
   useEffect(() => {
     if (token) dispatch(getContacts());
-  }, []);
+  }, [dispatch, token]);
 
   return (
     <AppContainer>
